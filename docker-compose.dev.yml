@@ -1,0 +1,7 @@
+version: "3.7"
+
+services:
+
+  prisma:
+    ports:
+      - '4466:4466'

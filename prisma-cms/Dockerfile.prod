@@ -1,0 +1,23 @@
+FROM mhart/alpine-node as build
+
+WORKDIR /www/prisma-cms
+
+# RUN apk add bash mc
+
+# COPY package.json ./
+
+# RUN npm install
+
+# Copy all files to the working directly, build the application
+# and purge the development dependencies
+COPY ./boilerplate .
+
+# RUN yarn
+# RUN yarn build
+
+# # RUN npm run build
+
+# EXPOSE 3000
+
+# # Start the server for Next.js using Node.js
+# CMD ["npm", "start"]

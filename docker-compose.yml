@@ -1,4 +1,4 @@
-version: "3"
+version: "3.7"
 
 services:
   prisma:
@@ -17,7 +17,7 @@ services:
             connector: mysql
             host: ${MYSQL_HOST:-mysql}
             port: ${MYSQL_PORT:-3306}
-            database: ${MYSQL_DB}
+            # database: ${MYSQL_DB}
             user: ${MYSQL_USER:-root}
             password: ${MYSQL_PASSWORD}
     depends_on:
@@ -41,6 +41,39 @@ services:
     depends_on:
       - mysql
 
+  prisma-cms-front:
+    tty: true
+    build:
+      context: ./prisma-cms
+      dockerfile: Dockerfile.dev
+    volumes:
+      - schema:/www/boilerplate/src/schema
+    # volumes:
+    #   - type: volume
+    #     source: schema
+    #     target: /prisma-cms/boilerplate/src/schema
+        # volume:
+        #   nocopy: true
+    # volumes:
+    #   - ./prisma-cms/boilerplate:/www/boilerplate
+
+  prisma-cms-back:
+    tty: true
+    build:
+      context: ./prisma-cms
+      dockerfile: Dockerfile.dev
+    volumes:
+      - schema:/www/boilerplate/src/schema
+    # volumes:
+    #   - type: volume
+    #     source: schema
+    #     target: /prisma-cms/boilerplate/src/schema
+        # volume:
+        #   nocopy: true
+      # - ./prisma-cms/boilerplate:/www/boilerplate
+      # - ./prisma-cms/boilerplate/src:/www/boilerplate/src
+
+  # web-server
   front:
     # image: abiosoft/caddy
     tty: true
@@ -49,11 +82,12 @@ services:
       # - CADDYPATH=/etc/certs
       - ACME_AGREE=true
     ports:
-      - 80:80
-      - 443:443
-    volumes:
+      - 2015:2015
+      # - 80:80
+      # - 443:443
+    # volumes:
       # - ./caddy/Caddyfile:/etc/Caddyfile
-      - ./certs:/etc/certs
+      # - ./certs:/etc/certs
       # - .:/app
     # depends_on:
       # - pma
@@ -63,3 +97,4 @@ services:
 
 volumes:
   mysql:
+  schema:

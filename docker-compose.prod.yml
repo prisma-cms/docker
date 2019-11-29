@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+  prisma-cms:
+    restart: always
+    volumes:
+      - ./prisma-cms/boilerplate/shared:/www/prisma-cms/shared
+      - ./prisma-cms/boilerplate/uploads:/www/prisma-cms/uploads
+
+    build:
+      dockerfile: Dockerfile.prod
