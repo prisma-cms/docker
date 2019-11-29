@@ -41,13 +41,14 @@ services:
     depends_on:
       - mysql
 
-  prisma-cms-front:
+  front:
     tty: true
     build:
       context: ./prisma-cms
       dockerfile: Dockerfile.dev
     volumes:
       - schema:/www/boilerplate/src/schema
+      - shared:/www/boilerplate/shared
     # volumes:
     #   - type: volume
     #     source: schema
@@ -57,13 +58,14 @@ services:
     # volumes:
     #   - ./prisma-cms/boilerplate:/www/boilerplate
 
-  prisma-cms-back:
+  api:
     tty: true
     build:
       context: ./prisma-cms
       dockerfile: Dockerfile.dev
     volumes:
       - schema:/www/boilerplate/src/schema
+      - uploads:/www/boilerplate/src/uploads
     # volumes:
     #   - type: volume
     #     source: schema
@@ -74,7 +76,7 @@ services:
       # - ./prisma-cms/boilerplate/src:/www/boilerplate/src
 
   # web-server
-  front:
+  proxy:
     # image: abiosoft/caddy
     tty: true
     restart: always
@@ -98,3 +100,5 @@ services:
 volumes:
   mysql:
   schema:
+  shared:
+  uploads:

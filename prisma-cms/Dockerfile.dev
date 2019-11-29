@@ -16,7 +16,7 @@ WORKDIR /www/boilerplate/
 # and purge the development dependencies
 COPY ./boilerplate .
 
-RUN yarn install --ignore-engines
+# RUN yarn install --ignore-engines
 
 
 # RUN yarn
