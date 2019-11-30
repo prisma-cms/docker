@@ -1,15 +1,5 @@
 
-
-pma.local {
-    tls off
-    gzip
-    proxy / pma:80 {
-        transparent
-        websocket
-    }
-}
-
-prisma-cms.local/api/ {
+prisma-cms.local/api/ localhost/api/ localhost:80/api/ {
     tls off
     gzip
 
@@ -25,7 +15,7 @@ prisma-cms.local/api/ {
 
 }
 
-prisma-cms.local {
+prisma-cms.local localhost localhost:80 {
     tls off
     gzip
 
@@ -39,12 +29,23 @@ prisma-cms.local {
     }
 }
 
-api.prisma-cms.local {
+api.prisma-cms.local localhost:2016 {
     tls off
     gzip
-    log   / stdout  "API: {upstream} {combined}  UPSTREAM: {upstream} REWRITE: {rewrite_uri} TOKEN: {>X-App-Token} COOKIE:{~AppSession}\n"
+
+    # log   / stdout  "API: {upstream} {combined}  UPSTREAM: {upstream} REWRITE: {rewrite_uri} TOKEN: {>X-App-Token} COOKIE:{~AppSession}\n"
 
     proxy / api:4000 {
+        transparent
+        websocket
+    }
+}
+
+
+pma.local localhost:2017 {
+    tls off
+    gzip
+    proxy / pma:80 {
         transparent
         websocket
     }
