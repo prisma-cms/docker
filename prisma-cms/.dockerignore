@@ -1,5 +1,5 @@
-/boilerplate/node_modules
-/boilerplate/build
-/boilerplate/shared
-/boilerplate/uploads
-/boilerplate/yarn.lock
+/*/node_modules
+/*/build
+/*/shared
+/*/uploads
+/*/yarn.lock
