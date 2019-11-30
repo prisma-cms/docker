@@ -43,57 +43,37 @@ services:
 
   front:
     tty: true
+    restart: always
     build:
       context: ./prisma-cms
-      dockerfile: Dockerfile.dev
     volumes:
       - schema:/www/boilerplate/src/schema
       - shared:/www/boilerplate/shared
-    # volumes:
-    #   - type: volume
-    #     source: schema
-    #     target: /prisma-cms/boilerplate/src/schema
-        # volume:
-        #   nocopy: true
-    # volumes:
-    #   - ./prisma-cms/boilerplate:/www/boilerplate
+    # environment: 
+    env_file: 
+      - .env
+    command: yarn start
 
   api:
     tty: true
+    restart: always
     build:
       context: ./prisma-cms
-      dockerfile: Dockerfile.dev
     volumes:
       - schema:/www/boilerplate/src/schema
-      - uploads:/www/boilerplate/src/uploads
-    # volumes:
-    #   - type: volume
-    #     source: schema
-    #     target: /prisma-cms/boilerplate/src/schema
-        # volume:
-        #   nocopy: true
-      # - ./prisma-cms/boilerplate:/www/boilerplate
-      # - ./prisma-cms/boilerplate/src:/www/boilerplate/src
+      - uploads:/www/boilerplate/uploads
+    depends_on:
+      - prisma
+    env_file: 
+      - .env
+    command: bash -c "echo $endpoint && yarn deploy && yarn start-server-dev"
 
   # web-server
   proxy:
-    # image: abiosoft/caddy
     tty: true
     restart: always
     environment:
-      # - CADDYPATH=/etc/certs
       - ACME_AGREE=true
-    ports:
-      - 2015:2015
-      # - 80:80
-      # - 443:443
-    # volumes:
-      # - ./caddy/Caddyfile:/etc/Caddyfile
-      # - ./certs:/etc/certs
-      # - .:/app
-    # depends_on:
-      # - pma
-      # - api
     build:
       context: ./caddy
 

@@ -1,0 +1,51 @@
+
+
+pma.local {
+    tls off
+    gzip
+    proxy / pma:80 {
+        transparent
+        websocket
+    }
+}
+
+prisma-cms.local/api/ {
+    tls off
+    gzip
+
+    # log   / stdout  "Front API: {upstream} {combined}  UPSTREAM: {upstream} REWRITE: {rewrite_uri} TOKEN: {>X-App-Token} COOKIE:{~AppSession}\n"
+ 
+    rewrite /api /
+ 
+
+    proxy / api:4000 {
+        transparent
+        websocket
+    }
+
+}
+
+prisma-cms.local {
+    tls off
+    gzip
+
+    # log   / stdout  "{upstream} {combined}  UPSTREAM: {upstream} REWRITE: {rewrite_uri} TOKEN: {>X-App-Token} COOKIE:{~AppSession}\n"
+   
+    proxy / front:3000 {
+        transparent
+        websocket
+        # header_upstream Connection {>Connection}
+        # header_upstream Upgrade {>Upgrade}
+    }
+}
+
+api.prisma-cms.local {
+    tls off
+    gzip
+    log   / stdout  "API: {upstream} {combined}  UPSTREAM: {upstream} REWRITE: {rewrite_uri} TOKEN: {>X-App-Token} COOKIE:{~AppSession}\n"
+
+    proxy / api:4000 {
+        transparent
+        websocket
+    }
+}

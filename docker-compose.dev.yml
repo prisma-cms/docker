@@ -5,3 +5,19 @@ services:
   prisma:
     ports:
       - '4466:4466'
+
+  front:
+    volumes:
+      - ./prisma-cms/boilerplate/src:/www/boilerplate/src
+
+  api:
+    volumes:
+      - ./prisma-cms/boilerplate/src:/www/boilerplate/src
+    environment: 
+      - SendmailTest=true
+
+  proxy:
+    ports:
+      - 2015:2015
+      - 2016:2016
+      - 2017:2017

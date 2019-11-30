@@ -1,11 +1,16 @@
 version: "3.7"
 
 services:
-  prisma-cms:
-    restart: always
-    # volumes:
-    #   - ./prisma-cms/boilerplate/shared:/www/prisma-cms/shared
-    #   - ./prisma-cms/boilerplate/uploads:/www/prisma-cms/uploads
 
-    build:
-      dockerfile: Dockerfile.prod
+  front:
+    command: bash -c "yarn build && yarn start-ssr"
+
+  api:
+    command: bash -c "echo $endpoint && yarn deploy && yarn start-server"
+
+  proxy:
+    environment:
+      - ACME_AGREE=true
+    ports:
+      - 80:80
+      - 443:443
