@@ -9,7 +9,11 @@
 git clone --recurse-submodules https://github.com/prisma-cms/docker my-project-name
 cd my-project-name
 ```
-2. Copy and edit web-server config file
+2. Copy and edit environments file
+```
+cp .env.sample .env
+```
+3. Copy and edit web-server config file
 ```
 cp caddy/Caddyfile.sample caddy/Caddyfile
 ```
