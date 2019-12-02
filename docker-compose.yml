@@ -61,6 +61,9 @@ services:
     volumes:
       - schema:/www/boilerplate/src/schema
       - uploads:/www/boilerplate/uploads
+
+      # For any server config files, for example DKIM
+      - ./opt:/opt
     depends_on:
       - prisma
     env_file: 
