@@ -9,13 +9,17 @@ done
 
 >&2 echo "Prisma server is up - executing command"
 
+# Пока что пропускаем эту логику, потому что обе схемы деплоятся в один волюм
+# 
 # Проверяем наличие схемы
-if [ -f "src/schema/generated/api.fragments.js" ]; then 
-  echo 'Skip deploy schema due already deployed'
-else
-  echo 'Deploy prisma schema'
-  yarn deploy
-fi
+# if [ -f "src/schema/generated/api.fragments.js" ]; then 
+#   echo 'Skip deploy schema due already deployed'
+# else
+#   echo 'Deploy prisma schema'
+#   yarn deploy
+# fi
+
+yarn deploy
 
 
 # if $cmd; then
