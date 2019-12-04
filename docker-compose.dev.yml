@@ -16,7 +16,7 @@ services:
       - ./prisma-cms/boilerplate/src:/www/boilerplate/src
     environment: 
       - SendmailTest=true
-    command: bash -c "echo $endpoint && yarn deploy && yarn start-server-dev"
+    command: "yarn start-server-dev"
 
   proxy:
     ports:

@@ -4,7 +4,6 @@ services:
   prisma:
     image: prismagraphql/prisma:1.34
     # container_name: "prisma"
-    restart: always
     
     # Uncomment for open ports
     # ports:
@@ -25,7 +24,6 @@ services:
 
   mysql:
     image: mysql:5.7
-    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
@@ -34,7 +32,6 @@ services:
 
   pma:
     image: phpmyadmin/phpmyadmin
-    restart: always
     environment:
       PMA_HOST: ${MYSQL_HOST:-mysql}
       PMA_PORT: ${MYSQL_PORT:-3306}
@@ -43,7 +40,6 @@ services:
 
   front:
     tty: true
-    restart: always
     build:
       context: ./prisma-cms
     volumes:
@@ -52,10 +48,12 @@ services:
     # environment: 
     env_file: 
       - .env
+    environment: 
+      - API_ENDPOINT=${API_ENDPOINT:-http://api:4000}
+    entrypoint: /usr/bin/entrypoint-front.sh
 
   api:
     tty: true
-    restart: always
     build:
       context: ./prisma-cms
     volumes:
@@ -68,10 +66,13 @@ services:
       - prisma
     env_file: 
       - .env
+    environment: 
+      - API_ENDPOINT=${API_ENDPOINT:-http://api:4000}
+      - endpoint=${dev_endpoint}
+    entrypoint: /usr/bin/entrypoint-api.sh
 
   # web-server
   proxy:
-    tty: true
     restart: always
     environment:
       - ACME_AGREE=true

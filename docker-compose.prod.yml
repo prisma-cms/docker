@@ -2,13 +2,29 @@ version: "3.7"
 
 services:
 
+  prisma:
+    restart: always
+
+  mysql:
+    restart: always
+
+  pma:
+    restart: always
+
   front:
-    command: bash -c "yarn build && yarn start-ssr"
+    restart: always
+    environment: 
+      ENV_MODE: production
+    command: yarn start-ssr
 
   api:
-    command: bash -c "echo $endpoint && yarn deploy && yarn start-server"
+    restart: always
+    environment: 
+      - endpoint=${prod_endpoint}
+    command: "yarn start-server"
 
   proxy:
+    restart: always
     environment:
       - ACME_AGREE=true
     ports:
