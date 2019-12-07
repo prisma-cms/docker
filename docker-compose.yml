@@ -73,7 +73,6 @@ services:
 
   # web-server
   proxy:
-    restart: always
     environment:
       - ACME_AGREE=true
     build:
