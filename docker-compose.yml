@@ -19,6 +19,8 @@ services:
             # database: ${MYSQL_DB}
             user: ${MYSQL_USER:-root}
             password: ${MYSQL_PASSWORD}
+            migrations: ${PRISMA_MIGRATIONS}
+            rawAccess: ${PRISMA_RAW_ACCESS}
     depends_on:
       - mysql
 
