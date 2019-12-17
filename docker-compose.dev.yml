@@ -6,6 +6,10 @@ services:
     ports:
       - '4466:4466'
 
+  mysql:
+    ports:
+      - '3306:3306'
+
   front:
     volumes:
       - ./prisma-cms/boilerplate/src:/www/boilerplate/src
@@ -23,3 +27,7 @@ services:
       - 2015:2015
       - 2016:2016
       - 2017:2017
+
+  pma:
+    ports:
+      - 8090:80
