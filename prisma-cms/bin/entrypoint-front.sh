@@ -13,7 +13,7 @@ done
 
 
 
-ls -la
+# ls -la
 
 if [ $ENV_MODE = "production" ] ; then
 

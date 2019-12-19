@@ -6,9 +6,11 @@ RUN apk add bash mc curl
 # RUN apk add --upgrade --no-cache vips-dev build-base \
 #   --repository https://alpine.global.ssl.fastly.net/alpine/v3.10/community/
 
-WORKDIR /www/boilerplate/
+ARG SITE=boilerplate
 
-COPY ./boilerplate .
+WORKDIR /www/${SITE}/
+
+COPY ./${SITE} .
 COPY ./bin/* /usr/bin/
 
 # Установку зависимостей нельзя переносить в entrypoint,

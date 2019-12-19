@@ -44,9 +44,11 @@ services:
     tty: true
     build:
       context: ./prisma-cms
+      args: 
+        - SITE=${SITE:-boilerplate}
     volumes:
-      - schema:/www/boilerplate/src/schema
-      - shared:/www/boilerplate/shared
+      - schema:/www/${SITE:-boilerplate}/src/schema
+      - shared:/www/${SITE:-boilerplate}/shared
     # environment: 
     env_file: 
       - .env
@@ -58,9 +60,11 @@ services:
     tty: true
     build:
       context: ./prisma-cms
+      args: 
+        - SITE=${SITE:-boilerplate}
     volumes:
-      - schema:/www/boilerplate/src/schema
-      - uploads:/www/boilerplate/uploads
+      - schema:/www/${SITE:-boilerplate}/src/schema
+      - uploads:/www/${SITE:-boilerplate}/uploads
 
       # For any server config files, for example DKIM
       - ./opt:/opt

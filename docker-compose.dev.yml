@@ -12,12 +12,12 @@ services:
 
   front:
     volumes:
-      - ./prisma-cms/boilerplate/src:/www/boilerplate/src
+      - ./prisma-cms/${SITE:-boilerplate}/src:/www/${SITE:-boilerplate}/src
     command: yarn start
 
   api:
     volumes:
-      - ./prisma-cms/boilerplate/src:/www/boilerplate/src
+      - ./prisma-cms/${SITE:-boilerplate}/src:/www/${SITE:-boilerplate}/src
     environment: 
       - SendmailTest=true
     command: "yarn start-server-dev"
