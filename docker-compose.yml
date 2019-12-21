@@ -64,7 +64,7 @@ services:
         - SITE=${SITE:-boilerplate}
     volumes:
       - schema:/www/${SITE:-boilerplate}/src/schema
-      - uploads:/www/${SITE:-boilerplate}/uploads
+      - ./prisma-cms/${SITE:-boilerplate}/uploads:/www/${SITE:-boilerplate}/uploads
 
       # For any server config files, for example DKIM
       - ./opt:/opt
@@ -88,4 +88,3 @@ volumes:
   mysql:
   schema:
   shared:
-  uploads:
