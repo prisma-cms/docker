@@ -49,6 +49,7 @@ services:
     volumes:
       - schema:/www/${SITE:-boilerplate}/src/schema
       - shared:/www/${SITE:-boilerplate}/shared
+      - ./prisma-cms/${SITE:-boilerplate}/uploads:/www/${SITE:-boilerplate}/uploads
     # environment: 
     env_file: 
       - .env
