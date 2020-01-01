@@ -21,8 +21,8 @@ services:
             password: ${MYSQL_PASSWORD}
             migrations: ${PRISMA_MIGRATIONS}
             rawAccess: ${PRISMA_RAW_ACCESS}
-    depends_on:
-      - mysql
+    # depends_on:
+    #   - mysql
 
   mysql:
     image: mysql:5.7
@@ -37,8 +37,8 @@ services:
     environment:
       PMA_HOST: ${MYSQL_HOST:-mysql}
       PMA_PORT: ${MYSQL_PORT:-3306}
-    depends_on:
-      - mysql
+    # depends_on:
+    #   - mysql
 
   front:
     tty: true
