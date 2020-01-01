@@ -69,8 +69,8 @@ services:
 
       # For any server config files, for example DKIM
       - ./opt:/opt
-    depends_on:
-      - prisma
+    # depends_on:
+    #   - prisma
     env_file: 
       - .env
     environment: 
