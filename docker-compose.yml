@@ -52,7 +52,6 @@ services:
       - schema:/www/${SITE:-boilerplate}/src/schema
       - shared:/www/${SITE:-boilerplate}/shared
       - ./prisma-cms/${SITE:-boilerplate}/uploads:/www/${SITE:-boilerplate}/uploads
-      - ./prisma-cms/${SITE:-boilerplate}/node_modules:/www/${SITE:-boilerplate}/node_modules
     # environment: 
     env_file: 
       - .env
