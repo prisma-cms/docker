@@ -1,3 +1,9 @@
+1.3.0
+=================================
+- Remove endpoints
+- Move front build into container creation
+- Added default network
+
 1.2.1
 =================================
 - Fix uploads volume

@@ -15,12 +15,19 @@ services:
     restart: always
     environment: 
       ENV_MODE: production
+    build:
+      args: 
+        - ENV_MODE=production
     command: yarn start-ssr
 
   api:
     restart: always
     environment: 
       - endpoint=${prod_endpoint}
+    build:
+      args: 
+        - ENV_MODE=production
+        - endpoint=${prod_endpoint}
     command: "yarn start-server"
 
   proxy:

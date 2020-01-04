@@ -2,6 +2,8 @@
 
 set -e
 
+echo "entrypoint-front.sh deprecated!"
+
 # Проверяем наличие схемы
 # Пока ее не будет, дальнейшее выполнение нельзя делать
 while [ ! -f "src/schema/generated/api.fragments.js" ]; do

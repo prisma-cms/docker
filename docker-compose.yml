@@ -46,16 +46,20 @@ services:
       context: ./prisma-cms
       args: 
         - SITE=${SITE:-boilerplate}
+        - ROLE=FRONT
+        - ENV_MODE=development
     volumes:
       - schema:/www/${SITE:-boilerplate}/src/schema
       - shared:/www/${SITE:-boilerplate}/shared
       - ./prisma-cms/${SITE:-boilerplate}/uploads:/www/${SITE:-boilerplate}/uploads
+      - ./prisma-cms/${SITE:-boilerplate}/node_modules:/www/${SITE:-boilerplate}/node_modules
     # environment: 
     env_file: 
       - .env
     environment: 
       - API_ENDPOINT=${API_ENDPOINT:-http://api:4000}
-    entrypoint: /usr/bin/entrypoint-front.sh
+      - ENV_MODE=development
+    # entrypoint: /usr/bin/entrypoint-front.sh
 
   api:
     tty: true
@@ -63,6 +67,10 @@ services:
       context: ./prisma-cms
       args: 
         - SITE=${SITE:-boilerplate}
+        - ROLE=API
+        - ENV_MODE=development
+        - endpoint=${dev_endpoint}
+      network: ${NETWORK_NAME:-prisma-cms-default}
     volumes:
       - schema:/www/${SITE:-boilerplate}/src/schema
       - ./prisma-cms/${SITE:-boilerplate}/uploads:/www/${SITE:-boilerplate}/uploads
@@ -76,7 +84,7 @@ services:
     environment: 
       - API_ENDPOINT=${API_ENDPOINT:-http://api:4000}
       - endpoint=${dev_endpoint}
-    entrypoint: /usr/bin/entrypoint-api.sh
+    # entrypoint: /usr/bin/entrypoint-api.sh
 
   # web-server
   proxy:
@@ -89,3 +97,7 @@ volumes:
   mysql:
   schema:
   shared:
+
+networks:
+  default:
+    name: ${NETWORK_NAME:-prisma-cms-default}
