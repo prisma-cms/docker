@@ -44,12 +44,14 @@ services:
     tty: true
     build:
       context: ./prisma-cms
+      network: ${NETWORK_NAME:-prisma-cms-default}
       args: 
         - SITE=${SITE:-boilerplate}
         - ROLE=FRONT
         - ENV_MODE=development
+        - endpoint=${dev_endpoint}
     volumes:
-      - schema:/www/${SITE:-boilerplate}/src/schema
+      # - schema:/www/${SITE:-boilerplate}/src/schema
       - shared:/www/${SITE:-boilerplate}/shared
       - ./prisma-cms/${SITE:-boilerplate}/uploads:/www/${SITE:-boilerplate}/uploads
     # environment: 
@@ -64,14 +66,14 @@ services:
     tty: true
     build:
       context: ./prisma-cms
+      network: ${NETWORK_NAME:-prisma-cms-default}
       args: 
         - SITE=${SITE:-boilerplate}
         - ROLE=API
         - ENV_MODE=development
         - endpoint=${dev_endpoint}
-      network: ${NETWORK_NAME:-prisma-cms-default}
     volumes:
-      - schema:/www/${SITE:-boilerplate}/src/schema
+      # - schema:/www/${SITE:-boilerplate}/src/schema
       - ./prisma-cms/${SITE:-boilerplate}/uploads:/www/${SITE:-boilerplate}/uploads
 
       # For any server config files, for example DKIM

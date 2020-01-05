@@ -18,6 +18,7 @@ services:
     build:
       args: 
         - ENV_MODE=production
+        - endpoint=${prod_endpoint}
     command: yarn start-ssr
 
   api:

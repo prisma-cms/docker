@@ -24,4 +24,4 @@ COPY ./bin/* /usr/bin/
 # потому что тот скрипт срабатывает уже тогда, когда контейнер создан и заменен имеющийся (если уже был запущен)
 RUN yarn install --ignore-engines
 
-RUN if [ "$ROLE" = "FRONT" ] ; then echo Build front ; /usr/bin/front.sh ; else echo ROLE is $ROLE ; /usr/bin/api.sh ; fi
+RUN if [ "$ROLE" = "FRONT" ] ; then echo Build front ; /usr/bin/front.sh ; else echo ROLE is $ROLE ; /usr/bin/deploy-api-schema.sh ; fi
