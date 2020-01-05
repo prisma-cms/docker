@@ -96,7 +96,7 @@ services:
 
 volumes:
   mysql:
-  schema:
+  # schema:
   shared:
 
 networks:
