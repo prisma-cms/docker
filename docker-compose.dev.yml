@@ -13,14 +13,14 @@ services:
   front:
     volumes:
       - ./prisma-cms/${SITE:-boilerplate}/src:/www/${SITE:-boilerplate}/src
-    command: yarn start
+    command: bash -c "yarn deploy && yarn start"
 
   api:
     volumes:
       - ./prisma-cms/${SITE:-boilerplate}/src:/www/${SITE:-boilerplate}/src
     environment: 
       - SendmailTest=true
-    command: "yarn start-server-dev"
+    command: bash -c "yarn deploy && yarn start-server-dev"
 
   proxy:
     ports:
