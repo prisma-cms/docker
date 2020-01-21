@@ -10,6 +10,8 @@ ENV endpoint $endpoint
 ARG ENV_MODE
 ENV ENV_MODE $ENV_MODE
 
+ARG PUBLIC_URL
+ENV PUBLIC_URL $PUBLIC_URL
 
 RUN apk add bash 
 RUN apk add mc 

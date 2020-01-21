@@ -17,6 +17,7 @@ services:
       ENV_MODE: production
     build:
       args: 
+        - PUBLIC_URL=${PUBLIC_URL:-/}
         - ENV_MODE=production
         - endpoint=${prod_endpoint}
     command: yarn start-ssr
