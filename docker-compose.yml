@@ -96,6 +96,10 @@ services:
       - ACME_AGREE=true
     build:
       context: ./caddy
+  
+  # mail-server
+  mail:
+    image: mailhog/mailhog
 
 volumes:
   mysql:

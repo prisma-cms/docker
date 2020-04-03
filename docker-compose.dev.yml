@@ -31,3 +31,7 @@ services:
   pma:
     ports:
       - 8090:80
+
+  mail:
+    ports:
+      - 8025:8025
