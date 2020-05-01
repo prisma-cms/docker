@@ -101,6 +101,37 @@ services:
   mail:
     image: mailhog/mailhog
 
+  rtcmultyconnection:
+    tty: true
+    build:
+      context: ./rtcmultyconnection
+    command: yarn --ignore-engines start
+
+  coturn:
+    build:
+      context: ./coturn
+    volumes:
+      - ./coturn/turnserver.conf:/etc/turnserver.conf
+    ports:
+      ## STUN/TURN
+      - "3478:3478"
+      - "3478:3478/udp"
+      - "3479:3479"
+      - "3479:3479/udp"
+      # - "80:80"
+      # - "80:80/udp"
+      ## STUN/TURN SSL
+      # - "5349:5349"
+      # - "5349:5349/udp"
+      # - "5350:5350"
+      # - "5350:5350/udp"
+      # - "443:443"
+      # - "443:443/udp"
+      # Relay Ports
+      #      - "49152-65535:49152-65535"
+      #      - "49152-65535:49152-65535/udp"
+      
+
 volumes:
   mysql:
   # schema:

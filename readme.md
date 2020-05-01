@@ -17,11 +17,59 @@ cp .env.sample .env
 ```
 cp caddy/Caddyfile.sample caddy/Caddyfile
 ```
+4. Copy and edit coturn config file
+```
+cp coturn/turnserver.conf.sample coturn/turnserver.conf
+```
 
 ## Start dev
+
+### First start
+
 ```
-docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build -d
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build -d mysql
 ```
+
+```
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build -d prisma
+```
+
+Check this containers been started
+```
+docker-compose ps mysql prisma
+```
+
+Start proxy server
+```
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build -d proxy
+```
+
+Start API-server
+```
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build -d api
+```
+After try open http://localhost:2016
+
+Start Front-server
+```
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build -d front
+```
+After try open http://localhost:2015
+
+### WebRTC services for videochats
+
+```
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build -d rtcmultyconnection coturn
+```
+
+### Additional services
+
+Start PhpMyAdmin
+```
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build -d pma
+```
+After try open http://localhost:2017
+
 
 ## Start prod
 ```
